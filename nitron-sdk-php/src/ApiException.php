@@ -14,13 +14,24 @@ use RuntimeException;
  */
 final class ApiException extends RuntimeException
 {
-    public function __construct(
-        private readonly int $status,
-        private readonly string $errorCode,
-        string $message,
-        private readonly ?array $body = null,
-    ) {
+    /** @var int */
+    private $status;
+
+    /** @var string */
+    private $errorCode;
+
+    /** @var array<mixed>|null */
+    private $body;
+
+    /**
+     * @param array<mixed>|null $body
+     */
+    public function __construct(int $status, string $errorCode, string $message, ?array $body = null)
+    {
         parent::__construct($message, $status);
+        $this->status = $status;
+        $this->errorCode = $errorCode;
+        $this->body = $body;
     }
 
     public function status(): int

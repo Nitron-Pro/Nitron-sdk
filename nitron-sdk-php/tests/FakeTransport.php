@@ -10,12 +10,18 @@ use Nitron\Sdk\TransportResponse;
 final class FakeTransport implements Transport
 {
     /** @var list<array{method: string, url: string, headers: array<string, string>, body: ?string}> */
-    public array $calls = [];
+    public $calls = [];
 
-    public function __construct(
-        private readonly int $status,
-        private readonly string $body,
-    ) {
+    /** @var int */
+    private $status;
+
+    /** @var string */
+    private $body;
+
+    public function __construct(int $status, string $body)
+    {
+        $this->status = $status;
+        $this->body = $body;
     }
 
     public function send(string $method, string $url, array $headers, ?string $body): TransportResponse

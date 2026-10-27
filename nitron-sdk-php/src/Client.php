@@ -18,21 +18,23 @@ final class Client
 
     private const GATEWAY = '/api/v1/gateway';
 
-    private readonly string $baseUrl;
+    /** @var string */
+    private $baseUrl;
 
-    private readonly Transport $transport;
+    /** @var string */
+    private $apiKey;
 
-    public function __construct(
-        string $baseUrl,
-        private readonly string $apiKey,
-        ?Transport $transport = null,
-        int $timeoutSeconds = 60,
-    ) {
+    /** @var Transport */
+    private $transport;
+
+    public function __construct(string $baseUrl, string $apiKey, ?Transport $transport = null, int $timeoutSeconds = 60)
+    {
         $baseUrl = rtrim($baseUrl, '/');
         if ($baseUrl === '') {
             throw new InvalidArgumentException('base URL is empty');
         }
         $this->baseUrl = $baseUrl;
+        $this->apiKey = $apiKey;
         $this->transport = $transport ?? new CurlTransport($timeoutSeconds);
     }
 
@@ -177,7 +179,7 @@ final class Client
         if ($path === '') {
             throw new InvalidArgumentException('path is empty');
         }
-        if (!str_starts_with($path, '/')) {
+        if ($path === '' || $path[0] !== '/') {
             $path = self::GATEWAY . '/' . ltrim($path, '/');
         }
 
@@ -207,7 +209,7 @@ final class Client
     /**
      * @param array<mixed>|null $payload
      */
-    private function reject(int $status, string $raw, ?array $payload): never
+    private function reject(int $status, string $raw, ?array $payload): void
     {
         $code = (string) $status;
         $message = '';

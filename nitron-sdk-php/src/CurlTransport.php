@@ -6,8 +6,12 @@ namespace Nitron\Sdk;
 
 final class CurlTransport implements Transport
 {
-    public function __construct(private readonly int $timeoutSeconds = 60)
+    /** @var int */
+    private $timeoutSeconds;
+
+    public function __construct(int $timeoutSeconds = 60)
     {
+        $this->timeoutSeconds = $timeoutSeconds;
     }
 
     public function send(string $method, string $url, array $headers, ?string $body): TransportResponse

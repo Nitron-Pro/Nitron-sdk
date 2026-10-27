@@ -1,6 +1,7 @@
 /vendor/
 /nitron-sdk-php/vendor/
 /nitron-sdk-php/.phpunit.cache/
+/nitron-sdk-php/.phpunit.result.cache
 .phpunit.cache/
 composer.lock
 /nitron-sdk-php/composer.lock

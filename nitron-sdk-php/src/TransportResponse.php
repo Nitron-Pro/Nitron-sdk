@@ -6,9 +6,15 @@ namespace Nitron\Sdk;
 
 final class TransportResponse
 {
-    public function __construct(
-        public readonly int $status,
-        public readonly string $body,
-    ) {
+    /** @var int */
+    public $status;
+
+    /** @var string */
+    public $body;
+
+    public function __construct(int $status, string $body)
+    {
+        $this->status = $status;
+        $this->body = $body;
     }
 }
