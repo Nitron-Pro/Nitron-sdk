@@ -1,0 +1,27 @@
+{
+    "name": "nitron/sdk",
+    "description": "PHP client for the Nitron gateway API (/api/v1/gateway). Amounts are rials.",
+    "type": "library",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.1",
+        "ext-curl": "*",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "Nitron\\Sdk\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Nitron\\Sdk\\Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit -c phpunit.xml.dist"
+    }
+}

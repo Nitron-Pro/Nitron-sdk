@@ -1,0 +1,7 @@
+{
+    "status": "unknown",
+    "code": 504,
+    "message": "عدم پاسخ در زمان مقرر (Timeout) — رزرو در حالت UNKNOWN جهت بررسی در مغایرت‌گیری حفظ شد.",
+    "reservation_id": "55555555-5555-5555-5555-555555555555",
+    "attempted_providers": ["passport"]
+}

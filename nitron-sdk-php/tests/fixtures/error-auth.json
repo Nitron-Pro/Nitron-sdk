@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "code": 401,
+    "error_code": "missing_api_key",
+    "message": "کلید API ارائه نشده است (هدر X-API-Key یا Authorization مورد نیاز است)"
+}

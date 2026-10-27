@@ -1,0 +1,20 @@
+{
+    "status": "success",
+    "message": "سرویس «فاکتور» با موفقیت اجرا و مبلغ 12500000 ریال از اعتبار کسر گردید",
+    "data": {
+        "operation_id": "op-invoice-1405-101",
+        "service_code": "pdf_generate",
+        "service_name": "فاکتور",
+        "category": "pdf",
+        "variant": "invoice",
+        "units_consumed": 1,
+        "unit_price": 12500000,
+        "tax_percent": 0,
+        "tax_amount": 0,
+        "total_cost": 12500000,
+        "output": {
+            "document_id": "doc-1405-101",
+            "document_number": "1405-101"
+        }
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "chat_id": "@accounting",
+    "type": "text",
+    "text": "فاکتور * {{number}} * ثبت شد.\nخریدار: {{buyer.name}}\nمبلغ: {{amount}} ریال\n[مشاهده در پنل](https://example.ir/invoices/{{number}})",
+    "variables": {
+        "number": "1405-101",
+        "amount": "12500000",
+        "buyer": {"name": "فروشگاه نمونه"}
+    },
+    "idempotency_key": "bale-invoice-1405-101"
+}

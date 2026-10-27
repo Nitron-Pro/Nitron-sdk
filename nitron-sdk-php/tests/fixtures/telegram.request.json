@@ -1,0 +1,9 @@
+{
+    "chat_id": "123456789",
+    "type": "text",
+    "text": "سلام {{name}}",
+    "parse_mode": "HTML",
+    "variables": {"name": "علی"},
+    "buttons": [[{"text": "سایت", "url": "https://example.ir"}]],
+    "idempotency_key": "tg-hello-ali"
+}

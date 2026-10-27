@@ -1,0 +1,17 @@
+{
+    "service_code": "pdf_generate",
+    "variant": "invoice",
+    "units": 1,
+    "idempotency_key": "invoice-1405-101",
+    "params": {
+        "template": "tpl_REPLACE",
+        "data": {
+            "number": "1405-101",
+            "seller": {"name": "شرکت نمونه"},
+            "buyer": {"name": "فروشگاه نمونه"},
+            "items": [
+                {"title": "خدمات", "qty": 1, "unit_price": 12500000, "discount": 0}
+            ]
+        }
+    }
+}

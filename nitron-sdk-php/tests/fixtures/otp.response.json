@@ -1,0 +1,13 @@
+{
+    "status": "success",
+    "message": "پیامک با موفقیت ارسال و هزینه از اعتبار کسر گردید",
+    "data": {
+        "reference_id": "8f6c2c1a-3d2e-4b7a-9c11-otp",
+        "provider": "passport",
+        "attempted_providers": ["passport"],
+        "parts": 1,
+        "tariff_version": "tv-1",
+        "total_cost": 3500,
+        "usage_event_id": "ue-otp-1"
+    }
+}

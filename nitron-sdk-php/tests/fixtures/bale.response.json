@@ -1,0 +1,22 @@
+{
+    "status": "success",
+    "message": "1 پیام در صف بله قرار گرفت",
+    "data": {
+        "batch_id": "batch-bale-1",
+        "bot_id": "bale-bot-1",
+        "bot_username": "nitron_bale",
+        "count": 1,
+        "total_estimated_cost": 6000,
+        "messages": [
+            {
+                "id": "msg-bale-1",
+                "number": 1,
+                "chat_id": "@accounting",
+                "type": "text",
+                "status": "queued",
+                "units": 1,
+                "estimated_cost": 6000
+            }
+        ]
+    }
+}

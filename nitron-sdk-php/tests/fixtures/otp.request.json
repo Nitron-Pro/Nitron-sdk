@@ -1,0 +1,7 @@
+{
+    "to": "09120000000",
+    "template_code": "login",
+    "code": "483920",
+    "service_code": "sms_otp",
+    "idempotency_key": "otp-09120000000-483920"
+}

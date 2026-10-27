@@ -1,0 +1,15 @@
+{
+    "status": "success",
+    "message": "کلید API احراز هویت شد",
+    "data": {
+        "key": {
+            "id": "22222222-2222-2222-2222-222222222222",
+            "name": "plugin",
+            "key_prefix": "nit_test_",
+            "environment": "test"
+        },
+        "organization": {"id": "33333333-3333-3333-3333-333333333333", "name": "شرکت نمونه"},
+        "project": {"id": "44444444-4444-4444-4444-444444444444", "name": "فروشگاه", "budget_limit": 0, "spent_amount": 12500000},
+        "subscription": null
+    }
+}

@@ -1,0 +1,10 @@
+nitron-sdk-python/ export-ignore
+nitron-sdk-go/ export-ignore
+nitron-sdk-node/ export-ignore
+nitron-sdk-java/ export-ignore
+nitron-sdk-kotlin/ export-ignore
+nitron-sdk-swift/ export-ignore
+nitron-sdk-dart/ export-ignore
+nitron-sdk-csharp/ export-ignore
+nitron-sdk-php/tests/ export-ignore
+nitron-sdk-php/phpunit.xml.dist export-ignore
