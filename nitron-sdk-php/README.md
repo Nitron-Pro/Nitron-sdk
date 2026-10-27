@@ -104,6 +104,39 @@ $otp = $nitron->sendSms([
 $costRials = $otp['data']['total_cost'];
 ```
 
+## قراردادهایی که ماژول نباید حدس بزند
+
+`me()['data']['services']` و `services()` فقط سرویس‌هایی را می‌دهند که همین کلید اجازهٔ خرج کردنشان را دارد. هر ردیف `code`، `name`، `category`، `unit_name`، `unit_price` (ریال) و `currency` برابر `IRR` دارد. اگر کلید فقط `sms:write` باشد، تلگرام و PDF در این فهرست نیستند و اجرای آن‌ها از سمت نیترون با ۴۰۳ رد می‌شود.
+
+```php
+$tariff = $nitron->services();
+$priceRials = $tariff['data'][0]['unit_price'];
+```
+
+مصرف و تراکنش صفحه‌بندی واقعی دارند. پارامترها: `from` و `to` به شکل `YYYY-MM-DD`، `service_code`، `idempotency_key`، و برای تراکنش `type` برابر `debit` یا `credit`. پاسخ `data` و `meta` دارد.
+
+```php
+$usage = $nitron->usage(['from' => '2026-03-21', 'to' => '2026-04-20', 'service_code' => 'sms_otp', 'page' => 1]);
+$tx = $nitron->walletTransactions(['idempotency_key' => 'invoice-1405-101', 'type' => 'debit']);
+```
+
+شارژ کیف پول:
+
+```php
+$pay = $nitron->requestPayment(['amount' => 1000000, 'callback_url' => 'https://shop.example/nitron/return']);
+$url = $pay['data']['payment_url'];
+$id = $pay['data']['id'];
+$back = $pay['data']['callback_url'];
+$state = $nitron->paymentStatus($pay['data']['authority']);
+$credited = $state['data']['paid']; // true فقط وقتی شارژ نشسته باشد
+```
+
+خروجی PDF علاوه بر `document_id` فیلدهای `html` و `download_path` دارد. `document($id)` همان HTML را دوباره می‌دهد و `document($id, ['format' => 'html'])` خود فایل است.
+
+تکرار `execute` یا `sendSms` با همان `idempotency_key` و همان بدنه، پاسخ قبلی را با هدر `X-Idempotent-Replay` برمی‌گرداند و دوباره پول کم نمی‌کند. کلید داخل `data.idempotency_key` ذخیره شده است.
+
+بدنهٔ OTP همان چیزی است که `sendSms` می‌فرستد: `to`، `template_code`، `code`، `service_code`.
+
 ## بقیهٔ مسیرها
 
 `request` هر مسیری را که متد اختصاصی ندارد صدا می‌زند. مسیر بدون اسلش اول، به `/api/v1/gateway/` چسبانده می‌شود.

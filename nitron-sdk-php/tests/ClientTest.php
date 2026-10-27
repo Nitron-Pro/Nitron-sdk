@@ -107,6 +107,30 @@ final class ClientTest extends TestCase
         self::assertSame('IRR', $balance['data']['currency']);
     }
 
+    public function testModuleContractRoutes(): void
+    {
+        [$client, $transport] = $this->client(200, '{"status":"success","data":{"paid":false,"unit_price":3500,"html":"<p></p>","idempotency_key":"invoice-1405-101"}}');
+
+        $client->services();
+        $client->usage(['from' => '2026-01-01', 'to' => '2026-01-31', 'service_code' => 'sms_otp', 'idempotency_key' => 'otp-1', 'page' => 1]);
+        $client->walletTransactions(['type' => 'debit', 'idempotency_key' => 'invoice-1405-101']);
+        $client->requestPayment(['amount' => 1000000, 'callback_url' => 'https://shop.example/return']);
+        $client->paymentStatus('A0001');
+        $client->document('doc-1', ['format' => 'html']);
+
+        self::assertSame('https://gateway.test/api/v1/gateway/services', $transport->calls[0]['url']);
+        self::assertSame(
+            'https://gateway.test/api/v1/gateway/usage?from=2026-01-01&to=2026-01-31&service_code=sms_otp&idempotency_key=otp-1&page=1',
+            $transport->calls[1]['url']
+        );
+        self::assertStringContainsString('type=debit', $transport->calls[2]['url']);
+        self::assertSame('POST', $transport->calls[3]['method']);
+        self::assertSame('https://gateway.test/api/v1/gateway/payment/request', $transport->calls[3]['url']);
+        self::assertSame(1000000, $this->decode($transport->calls[3]['body'])['amount']);
+        self::assertSame('https://gateway.test/api/v1/gateway/payment/A0001', $transport->calls[4]['url']);
+        self::assertSame('https://gateway.test/api/v1/gateway/documents/doc-1?format=html', $transport->calls[5]['url']);
+    }
+
     public function testRequestReachesRoutesWithoutADedicatedMethod(): void
     {
         [$client, $transport] = $this->client(200, '{"status":"success","data":[]}');

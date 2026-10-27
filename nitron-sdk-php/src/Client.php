@@ -123,6 +123,71 @@ final class Client
     }
 
     /**
+     * GET /api/v1/gateway/services. Only services this key may spend, with rial unit_price.
+     *
+     * @return array<mixed>
+     */
+    public function services(): array
+    {
+        return $this->request('GET', self::GATEWAY . '/services');
+    }
+
+    /**
+     * GET /api/v1/gateway/usage. Query keys: from, to, service_code, idempotency_key, page, per_page.
+     *
+     * @param array<string, scalar|null> $query
+     * @return array<mixed>
+     */
+    public function usage(array $query = []): array
+    {
+        return $this->request('GET', self::GATEWAY . '/usage', null, $query);
+    }
+
+    /**
+     * GET /api/v1/gateway/wallet/transactions.
+     * Query keys: from, to, service_code, idempotency_key, type (debit|credit), page, per_page.
+     *
+     * @param array<string, scalar|null> $query
+     * @return array<mixed>
+     */
+    public function walletTransactions(array $query = []): array
+    {
+        return $this->request('GET', self::GATEWAY . '/wallet/transactions', null, $query);
+    }
+
+    /**
+     * POST /api/v1/gateway/payment/request. amount is rials. data.payment_url, data.id, data.callback_url.
+     *
+     * @param array<string, mixed> $body
+     * @return array<mixed>
+     */
+    public function requestPayment(array $body): array
+    {
+        return $this->request('POST', self::GATEWAY . '/payment/request', $body);
+    }
+
+    /**
+     * GET /api/v1/gateway/payment/{authority}. data.paid is true after the wallet is credited.
+     *
+     * @return array<mixed>
+     */
+    public function paymentStatus(string $authority): array
+    {
+        return $this->request('GET', self::GATEWAY . '/payment/' . rawurlencode($authority));
+    }
+
+    /**
+     * GET /api/v1/gateway/documents/{id}. data.html is the document. format=html returns the file.
+     *
+     * @param array<string, scalar|null> $query
+     * @return array<mixed>
+     */
+    public function document(string $id, array $query = []): array
+    {
+        return $this->request('GET', self::GATEWAY . '/documents/' . rawurlencode($id), null, $query);
+    }
+
+    /**
      * POST /api/v1/gateway/sms/send
      *
      * OTP uses to, template_code, code and service_code sms_otp.
